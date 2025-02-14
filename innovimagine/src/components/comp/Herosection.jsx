@@ -1,38 +1,130 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 
+gsap.registerPlugin(ScrollTrigger);
 function Herosection() {
+  const headingRef = useRef();
+  const subtextRef = useRef();
+  const imagesRef = useRef([null, null, null]);
+
+  useEffect(() => {
+    gsap.fromTo(
+      headingRef.current,
+      { opacity: 0, y: -50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 80%",
+        },
+      }
+    );
+
+    gsap.fromTo(
+      subtextRef.current,
+      { opacity: 0, y: -20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: subtextRef.current,
+          start: "top 70%",
+        },
+      }
+    );
+  }, []);
+
+  const RotatingModel = () => {
+    const modelRef = useRef();
+    const { scene } = useGLTF("/models/space_boi.glb");
+    console.log("Loaded model:", scene);
+    
+    const [isDragging, setIsDragging] = useState(false);
+    const dragStart = useRef({ x: 0, y: 0 });
+    const dragRotation = useRef({ x: 0, y: 0 });
+
+    useFrame(() => {
+      if (modelRef.current && !isDragging) {
+        modelRef.current.rotation.y += 0.002; // Smooth auto-rotation
+      }
+    });
+
+
+
+    return (
+      <primitive
+        ref={modelRef}
+        object={scene}
+        scale={[0.8, 0.8, 0.8]} // Adjusted scale to fit the model
+        position={[0, -1.5, 0]} // Adjusted position to center the model
+      />
+    );
+  };
+
+
   return (
-    <div>  
-            <section className="w-full bg-gradient-to-r from-gray-900 to-blue-900 text-white  min-h-screen flex items-center">
-    <div className="mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-      {/* Left Content */}
-      <div className="text-left">
-        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-          Transform Digital Dreams into Reality
-        </h1>
-        <p className="mt-4 text-lg text-gray-300">
-          InnovImagine crafts cutting-edge digital solutions that push the boundaries of technology and innovation.
-        </p>
-        {/* Buttons */}
-        <div className="mt-6 flex space-x-4">
-          <button className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-6 rounded-lg transition-all">
-            Explore Services
-          </button>
-          <button className="border border-white text-white hover:bg-white hover:text-gray-900 font-medium py-3 px-6 rounded-lg transition-all">
-            View Portfolio
-          </button>
+    <>
+      <div className="relative min-h-screen">
+        {/* 3D Viewer Background */}
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: -1,
+            backgroundColor: "#000000", // Explicit black background
+          }}
+        >
+          <Canvas
+            camera={{
+              position: [0, 2, 10], // Set the camera further back
+              fov: 45, // Adjusted FOV for a better fit
+              near: 0.1,
+              far: 100,
+            }}
+          >
+            {/* Ambient light for general illumination */}
+            <ambientLight intensity={0.3} />
+
+            {/* Directional light with a higher intensity to highlight the model */}
+            <directionalLight position={[10, 10, 5]} intensity={1} />
+            
+            {/* Add a spotlight for dynamic highlighting */}
+            <spotLight position={[0, 5, 5]} intensity={1.5} angle={Math.PI / 6} penumbra={1} />
+
+            {/* Rotating model */}
+            <RotatingModel />
+            <OrbitControls enableZoom={false} />
+     
+          </Canvas>
+        </div>
+
+        {/* Foreground Content */}
+        <div className="relative z-10  text-gray-200 min-h-screen flex flex-col justify-center items-center text-center px-4">
+          <h1
+            ref={headingRef}
+            className="text-4xl font-serif sm:text-5xl font-bold text-gray-100 mb-4"
+          >
+            INNOVIMAGINE
+          </h1>
+          <p ref={subtextRef} className="text-gray-400 text-lg sm:text-xl mb-6">
+            Innovative Solutions for Unparalleled Digital Experiences
+          </p>
         </div>
       </div>
-      {/* Right Image */}
-      <div className="flex justify-center">
-        <img
-          src="/your-image.png" // Replace with actual image URL
-          alt="Digital Innovation"
-          className="max-w-full h-auto rounded-xl shadow-lg"
-        />
-      </div>
-    </div>
-  </section></div>
+      
+
+    </>
   )
 }
 

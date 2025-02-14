@@ -1,6 +1,6 @@
 import React from 'react';
 import { Check } from 'lucide-react';
-
+import { Link } from 'react-router-dom';
 function Pricing() {
   const pricingPlans = [
     {
@@ -21,14 +21,14 @@ function Pricing() {
   ];
 
   return (
-    <div className="  bg-gradient-to-b from-gray-50 to-white">
+    <div className="  ">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Transparent & Flexible Pricing
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-white max-w-2xl mx-auto">
             Customized pricing solutions tailored to your business needs, with scalable
             options for startups and enterprises.
           </p>
@@ -39,11 +39,11 @@ function Pricing() {
           {pricingPlans.map((plan) => (
             <div
               key={plan.name}
-              className="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              className="bg-gray-700 rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
             >
               <div className="space-y-6">
                 {/* Plan Name */}
-                <h3 className="text-xl font-semibold text-purple-900">
+                <h3 className="text-xl font-semibold text-white">
                   {plan.name}
                 </h3>
 
@@ -52,7 +52,7 @@ function Pricing() {
                   <span className="text-4xl font-bold text-purple-600">
                     ${plan.price}
                   </span>
-                  <span className="text-gray-500 ml-1">/mo</span>
+                  <span className="text-gray-500 ml-1"></span>
                 </div>
 
                 {/* Features */}
@@ -60,15 +60,13 @@ function Pricing() {
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-center space-x-3">
                       <Check className="h-5 w-5 text-green-500" />
-                      <span className="text-gray-600">{feature}</span>
+                      <span className="text-white">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 {/* Action Button */}
-                <button className="w-full py-3 px-6 rounded-lg bg-pink-500 text-white font-medium hover:bg-pink-600 transition-colors duration-200">
-                  Select Plan
-                </button>
+
               </div>
             </div>
           ))}
@@ -76,12 +74,11 @@ function Pricing() {
 
         {/* Contact Section */}
         <div className="text-center mt-12">
-          <a
-            href="#contact"
+          <Link to="/contact"
             className="text-pink-500 hover:text-pink-600 font-medium transition-colors duration-200"
           >
             Contact Our Sales Team
-          </a>
+          </Link>
         </div>
       </div>
     </div>

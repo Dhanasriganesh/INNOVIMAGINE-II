@@ -20,9 +20,9 @@ const Home = () => {
       <div>
         <Ainnov />
       </div>
-      <div>
+      {/* <div>
         <Pricing />
-      </div>
+      </div> */}
       <div>
         <Contact />
       </div>

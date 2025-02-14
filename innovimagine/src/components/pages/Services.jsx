@@ -35,10 +35,10 @@ const services = [
 
 function Services() {
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-bold text-gray-900">Our Innovative Services</h2>
-        <p className="mt-4 text-lg text-gray-600">
+        <h2 className="text-4xl font-bold text-white">Our Innovative Services</h2>
+        <p className="mt-4 text-lg text-white">
           Transforming digital landscapes with cutting-edge technological solutions tailored to your unique business needs.
         </p>
       </div>
@@ -47,12 +47,12 @@ function Services() {
         {services.map((service, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-md p-6 flex flex-col items-start transition-transform transform hover:scale-105 hover:shadow-lg"
+            className="bg-gray-700 rounded-xl shadow-md p-6 flex flex-col items-start transition-transform transform hover:scale-105 hover:shadow-lg"
           >
             <span className="text-3xl">{service.icon}</span>
-            <h3 className="mt-4 text-xl font-semibold text-gray-900">{service.title}</h3>
-            <p className="mt-2 text-gray-600">{service.description}</p>
-            <span className="mt-4 text-indigo-500 text-sm font-medium">→</span>
+            <h3 className="mt-4 text-xl font-semibold text-white">{service.title}</h3>
+            <p className="mt-2 text-white">{service.description}</p>
+            <span className="mt-4 text-white text-sm font-medium">→</span>
           </div>
         ))}
       </div>

@@ -43,10 +43,10 @@ function Ainnov() {
       <div className="max-w-7xl mx-auto relative">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-800 to-purple-800 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             AI Innovations
           </h2>
-          <p className=" text-lg max-w-2xl mx-auto">
+          <p className=" text-lg text-white max-w-2xl mx-auto">
             Transformative AI solutions that push the boundaries of technology and innovation
           </p>
         </div>
@@ -56,7 +56,7 @@ function Ainnov() {
           {aiSolutions.map((solution, index) => (
             <div
               key={index}
-              className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:bg-gray-800/70"
+              className="bg-gray-700 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:bg-gray-800/70"
             >
               <div className="flex items-center space-x-4 mb-4">
                 <div className="p-2 bg-purple-500/20 rounded-lg text-purple-300">
@@ -66,7 +66,7 @@ function Ainnov() {
                   {solution.title}
                 </h3>
               </div>
-              <p className="">
+              <p className="text-white">
                 {solution.description}
               </p>
             </div>
@@ -75,7 +75,7 @@ function Ainnov() {
 
         {/* CTA Button */}
         <div className="text-center">
-          <button className="bg-purple-600 hover:bg-purple-700  font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
+          <button className="text-white bg-gray-600 hover:bg-purple-700  font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
             Explore AI Solutions
           </button>
         </div>
