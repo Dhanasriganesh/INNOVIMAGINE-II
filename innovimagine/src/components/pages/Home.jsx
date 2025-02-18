@@ -5,25 +5,23 @@ import Portfolio from '../comp/Portfolio';
 import Services from './Services';
 import Contact from './Contact';
 import Herosection from '../comp/Herosection';
+
 const Home = () => {
   return (
-    <div className=''>
-      <div>
+    <div>
+      <div id="hero">
         <Herosection />
       </div>
-      <div>
+      <div id="services">
         <Services />
       </div>
-      <div>
+      <div id="portfolio">
         <Portfolio />
       </div>
-      <div>
+      <div id="innovations">
         <Ainnov />
       </div>
-      {/* <div>
-        <Pricing />
-      </div> */}
-      <div>
+      <div id="contact">
         <Contact />
       </div>
     </div>

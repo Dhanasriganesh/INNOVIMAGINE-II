@@ -75,9 +75,9 @@ function Ainnov() {
 
         {/* CTA Button */}
         <div className="text-center">
-          <button className="text-white bg-gray-600 hover:bg-purple-700  font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
+          {/* <button className="text-white bg-gray-600 hover:bg-purple-700  font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
             Explore AI Solutions
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

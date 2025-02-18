@@ -5,10 +5,33 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 
 gsap.registerPlugin(ScrollTrigger);
+
+function RotatingModel() {
+  const modelRef = useRef();
+  const { scene } = useGLTF("/models/space_boi.glb");
+
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.y += 0.002; // Smooth auto-rotation
+    }
+  });
+
+  return (
+    <primitive
+      ref={modelRef}
+      object={scene}
+      scale={[0.8, 0.8, 0.8]} // Adjusted scale
+      position={[0, -1.5, 0]} // Centered model
+    />
+  );
+}
+
+// Preload the model for better performance
+useGLTF.preload("/models/space_boi.glb");
+
 function Herosection() {
-  const headingRef = useRef();
-  const subtextRef = useRef();
-  const imagesRef = useRef([null, null, null]);
+  const headingRef = useRef(null);
+  const subtextRef = useRef(null);
 
   useEffect(() => {
     gsap.fromTo(
@@ -42,90 +65,37 @@ function Herosection() {
     );
   }, []);
 
-  const RotatingModel = () => {
-    const modelRef = useRef();
-    const { scene } = useGLTF("/models/space_boi.glb");
-    console.log("Loaded model:", scene);
-    
-    const [isDragging, setIsDragging] = useState(false);
-    const dragStart = useRef({ x: 0, y: 0 });
-    const dragRotation = useRef({ x: 0, y: 0 });
-
-    useFrame(() => {
-      if (modelRef.current && !isDragging) {
-        modelRef.current.rotation.y += 0.002; // Smooth auto-rotation
-      }
-    });
-
-
-
-    return (
-      <primitive
-        ref={modelRef}
-        object={scene}
-        scale={[0.8, 0.8, 0.8]} // Adjusted scale to fit the model
-        position={[0, -1.5, 0]} // Adjusted position to center the model
-      />
-    );
-  };
-
-
   return (
-    <>
-      <div className="relative min-h-screen">
-        {/* 3D Viewer Background */}
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: -1,
-            backgroundColor: "#000000", // Explicit black background
-          }}
+    <div className="relative min-h-screen">
+      {/* 3D Model Background */}
+      <div
+        className="fixed top-0 left-0 w-full h-full z-[-1] bg-black"
+      >
+        <Canvas
+          camera={{ position: [0, 2, 10], fov: 45, near: 0.1, far: 100 }}
         >
-          <Canvas
-            camera={{
-              position: [0, 2, 10], // Set the camera further back
-              fov: 45, // Adjusted FOV for a better fit
-              near: 0.1,
-              far: 100,
-            }}
-          >
-            {/* Ambient light for general illumination */}
-            <ambientLight intensity={0.3} />
-
-            {/* Directional light with a higher intensity to highlight the model */}
-            <directionalLight position={[10, 10, 5]} intensity={1} />
-            
-            {/* Add a spotlight for dynamic highlighting */}
-            <spotLight position={[0, 5, 5]} intensity={1.5} angle={Math.PI / 6} penumbra={1} />
-
-            {/* Rotating model */}
-            <RotatingModel />
-            <OrbitControls enableZoom={false} />
-     
-          </Canvas>
-        </div>
-
-        {/* Foreground Content */}
-        <div className="relative z-10  text-gray-200 min-h-screen flex flex-col justify-center items-center text-center px-4">
-          <h1
-            ref={headingRef}
-            className="text-4xl font-serif sm:text-5xl font-bold text-gray-100 mb-4"
-          >
-            INNOVIMAGINE
-          </h1>
-          <p ref={subtextRef} className="text-gray-400 text-lg sm:text-xl mb-6">
-            Innovative Solutions for Unparalleled Digital Experiences
-          </p>
-        </div>
+          <ambientLight intensity={0.3} />
+          <directionalLight position={[10, 10, 5]} intensity={1} />
+          <spotLight position={[0, 5, 5]} intensity={1.5} angle={Math.PI / 6} penumbra={1} />
+          <RotatingModel />
+          <OrbitControls enableZoom={false} />
+        </Canvas>
       </div>
-      
 
-    </>
-  )
+      {/* Foreground Content */}
+      <div className="relative z-10 text-gray-200 min-h-screen flex flex-col justify-center items-center text-center px-4">
+        <h1
+          ref={headingRef}
+          className="text-4xl font-serif sm:text-5xl font-bold text-gray-100 mb-4"
+        >
+          INNOVIMAGINE
+        </h1>
+        <p ref={subtextRef} className="text-gray-400 text-lg sm:text-xl mb-6">
+          Innovative Solutions for Unparalleled Digital Experiences
+        </p>
+      </div>
+    </div>
+  );
 }
 
-export default Herosection
+export default Herosection;

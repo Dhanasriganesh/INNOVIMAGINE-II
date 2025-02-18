@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linkedin, Twitter, Github, MapPin, Mail, Phone } from 'lucide-react';
+import { Linkedin, Instagram, Facebook, MapPin, Mail, Phone } from 'lucide-react';
  import bgimg from "../images/bgimg.png"
 function Footer() {
   return (
@@ -16,14 +16,14 @@ function Footer() {
               Transforming digital landscapes with innovative technology solutions and cutting-edge design.
             </p>
             <div className="flex space-x-4">
-              <a href="https://linkedin.com" className="text-white transition-colors">
+              <a href="https://www.linkedin.com/in/innov-imagine-582915350/" className="text-white transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="https://twitter.com" className="text-white transition-colors">
-                <Twitter className="w-5 h-5" />
+              <a href="https://www.instagram.com/innovimagine?igsh=MWgyd3h2N3JvMWFmdg==" className="text-white transition-colors">
+                <Instagram className="w-5 h-5" />
               </a>
-              <a href="https://github.com" className="text-white transition-colors">
-                <Github className="w-5 h-5" />
+              <a href="https://www.facebook.com/share/18dGf6b7YL/?mibextid=qi2Omg" className="text-white transition-colors">
+                <Facebook className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -82,8 +82,8 @@ function Footer() {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-white" />
-                <a href="tel:+1555123-4567" className="text-white transition-colors">
-                  +91 8522997578
+                <a href="tel:+917569460743" className="text-white transition-colors">
+                  +91 7569460743
                 </a>
               </li>
             </ul>
