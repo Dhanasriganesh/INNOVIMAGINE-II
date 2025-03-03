@@ -7,10 +7,10 @@ import Herosection from '../comp/Herosection'
 const Layout = () => {
   return (
     <Router>
-      {/* <Header/> */}
+      <Header/>
 <Herosection/>
-      {/* <Routers/> */}
-      {/* <Footer/> */}
+      <Routers/>
+      <Footer/>
     </Router>
   )
 }
